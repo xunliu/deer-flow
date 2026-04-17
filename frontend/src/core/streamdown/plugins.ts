@@ -28,6 +28,18 @@ export const streamdownPluginsWithWordAnimation = {
   ] as StreamdownProps["rehypePlugins"],
 };
 
+// Plugins for reasoning/thinking content — same as streamdownPlugins but without rehypeRaw,
+// to prevent LLM-hallucinated HTML tags (e.g. <simd>) from being rendered as DOM elements.
+export const reasoningPlugins = {
+  remarkPlugins: [
+    remarkGfm,
+    [remarkMath, { singleDollarTextMath: true }],
+  ] as StreamdownProps["remarkPlugins"],
+  rehypePlugins: [
+    [rehypeKatex, { output: "html" }],
+  ] as StreamdownProps["rehypePlugins"],
+};
+
 // Plugins for human messages - no autolink to prevent URL bleeding into adjacent text
 export const humanMessagePlugins = {
   remarkPlugins: [
